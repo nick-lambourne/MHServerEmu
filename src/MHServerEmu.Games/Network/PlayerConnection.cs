@@ -481,6 +481,7 @@ namespace MHServerEmu.Games.Network
                 case ClientToGameServerMessage.NetMessageVendorRequestSellItemTo:           OnVendorRequestSellItemTo(message); break;          // 103
                 case ClientToGameServerMessage.NetMessageVendorRequestDonateItemTo:         OnVendorRequestDonateItemTo(message); break;        // 104
                 case ClientToGameServerMessage.NetMessageVendorRequestRefresh:              OnVendorRequestRefresh(message); break;             // 105
+                case ClientToGameServerMessage.NetMessageGuildMessageToPlayerManager:       OnGuildMessageToPlayerManager(message); break;      // 108
                 case ClientToGameServerMessage.NetMessageSetTipSeen:                        OnSetTipSeen(message); break;                       // 110
                 case ClientToGameServerMessage.NetMessageHUDTutorialDismissed:              OnHUDTutorialDismissed(message); break;             // 111
                 case ClientToGameServerMessage.NetMessageTryMoveInventoryContentsToGeneral: OnTryMoveInventoryContentsToGeneral(message); break;// 112
@@ -1217,6 +1218,14 @@ namespace MHServerEmu.Games.Network
             if (vendorRequestRefresh == null) return Logger.WarnReturn(false, $"OnVendorRequestRefresh(): Failed to retrieve message");
 
             Player?.RefreshVendorInventory(vendorRequestRefresh.VendorId);
+            return true;
+        }
+
+        private bool OnGuildMessageToPlayerManager(MailboxMessage message)   // 108
+        {
+            var setGuildMessageToPlayerManager = message.As<NetMessageGuildMessageToPlayerManager>();
+            if (setGuildMessageToPlayerManager == null) return Logger.WarnReturn(false, $"OnGuildMessageToPlayerManager(): Failed to retrieve message");
+            Logger.InfoReturn(false, $"OnGuildMessageToPlayerManager(): {setGuildMessageToPlayerManager}");
             return true;
         }
 
