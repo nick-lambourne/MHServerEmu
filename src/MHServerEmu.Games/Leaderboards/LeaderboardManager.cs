@@ -31,7 +31,7 @@ namespace MHServerEmu.Games.Leaderboards
 
         public void Initialize()
         {
-            if (LeaderboardsEnabled) ScheduleUpdateEvent();
+            if (LeaderboardsEnabled && _updateEvent != null) ScheduleUpdateEvent();
         }
 
         public void Destory()
