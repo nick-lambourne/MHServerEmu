@@ -187,6 +187,7 @@ namespace MHServerEmu.Games.Leaderboards
 
         private void CancelUpdateEvent()
         {
+            if(_updateEvent == null) return;
             var scheduler = Game?.GameEventScheduler;
             if (scheduler == null) return;
             scheduler.CancelEvent(_updateEvent);
