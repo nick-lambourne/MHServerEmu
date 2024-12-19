@@ -3,7 +3,7 @@
 PRAGMA user_version = 2;
 
 CREATE TABLE "Leaderboards" (
-	"LeaderboardId"	INTEGER NOT NULL UNIQUE,
+	"LeaderboardId"	INTEGER NOT NULL PRIMARY KEY,
 	"PrototypeName"	TEXT,
 	"ActiveInstanceId"	INTEGER,
 	"IsActive"	INTEGER,
@@ -11,7 +11,7 @@ CREATE TABLE "Leaderboards" (
 );
 
 CREATE TABLE "Instances" (
-	"InstanceId"	INTEGER NOT NULL UNIQUE,
+	"InstanceId"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"LeaderboardId"	INTEGER NOT NULL,
 	"State"	INTEGER,
 	"ActivationDate"	INTEGER,
@@ -21,7 +21,6 @@ CREATE TABLE "Instances" (
 );
 
 CREATE TABLE "Entries" (
-	"Id"	INTEGER NOT NULL UNIQUE,
 	"InstanceId"	INTEGER NOT NULL,
 	"GameId"	INTEGER NOT NULL,
 	"Score"	INTEGER,
@@ -37,7 +36,7 @@ CREATE TABLE "MetaInstances" (
 	"MetaLeaderboardId"	INTEGER NOT NULL,
 	"MetaInstanceId"	INTEGER NOT NULL,
 	PRIMARY KEY("LeaderboardId", "InstanceId")
-)
+);
 
 CREATE INDEX idx_instances_leaderboardid ON Instances (LeaderboardId);
 CREATE INDEX idx_entries_instanceid ON Entries (InstanceId);
