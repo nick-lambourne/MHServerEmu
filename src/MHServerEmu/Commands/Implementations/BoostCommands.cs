@@ -42,6 +42,38 @@ namespace MHServerEmu.Commands.Implementations
             avatar.Properties[PropertyEnum.DamagePctBonusVsBosses] = (float)vsboss;
 
             return $"Damage vs Bosses x{vsboss}";
-        }        
+        }   
+
+        [Command("xp", "Set Bonus XP %\nUsage: boost xp [0-100]")]
+        public string xp(string[] @params, FrontendClient client)
+        {
+            if (client == null) return "You can only invoke this command from the game.";
+
+            CommandHelper.TryGetPlayerConnection(client, out PlayerConnection playerConnection);
+            Avatar avatar = playerConnection.Player.CurrentAvatar;
+
+            if ((@params.Length > 0 && int.TryParse(@params[0], out int bonusXp)) == false)
+                bonusXp = 1;
+
+            bonusXp = Math.Clamp(bonusXp, 0, 100);
+            avatar.Properties[PropertyEnum.LootBonusXPPct] = (float)bonusXp;
+            return $"Loot Bonus XP%: x{bonusXp}";
+        }
+        
+        [Command("xpstack", "Set XPBonusStackCount \nUsage: boost xp [1-10000]")]
+        public string xpstack(string[] @params, FrontendClient client)
+        {
+            if (client == null) return "You can only invoke this command from the game.";
+
+            CommandHelper.TryGetPlayerConnection(client, out PlayerConnection playerConnection);
+            Avatar avatar = playerConnection.Player.CurrentAvatar;
+
+            if ((@params.Length > 0 && int.TryParse(@params[0], out int bonusXp)) == false)
+                bonusXp = 1;
+
+            bonusXp = Math.Clamp(bonusXp, 1, 10000);
+            avatar.Properties[PropertyEnum.XPBonusStackCount] = (float)bonusXp;
+            return $"XPBonusStackCount: x{bonusXp}";
+        }
     }
 }
