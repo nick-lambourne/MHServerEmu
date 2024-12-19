@@ -44,7 +44,7 @@ namespace MHServerEmu.Commands.Implementations
             return $"Damage vs Bosses x{vsboss}";
         }   
 
-        [Command("xp", "Set Bonus XP %\nUsage: boost xp [0-100]")]
+        [Command("xp", "Set Bonus XP%\nUsage: boost xp [0-10000]")]
         public string xp(string[] @params, FrontendClient client)
         {
             if (client == null) return "You can only invoke this command from the game.";
@@ -55,9 +55,9 @@ namespace MHServerEmu.Commands.Implementations
             if ((@params.Length > 0 && int.TryParse(@params[0], out int bonusXp)) == false)
                 bonusXp = 1;
 
-            bonusXp = Math.Clamp(bonusXp, 0, 100);
+            bonusXp = Math.Clamp(bonusXp, 0, 10000);
             avatar.Properties[PropertyEnum.LootBonusXPPct] = (float)bonusXp;
-            return $"Loot Bonus XP%: x{bonusXp}";
+            return $"Loot Bonus XP%: {bonusXp}%";
         }
         
         [Command("xpstack", "Set XPBonusStackCount \nUsage: boost xp [1-10000]")]
@@ -71,9 +71,9 @@ namespace MHServerEmu.Commands.Implementations
             if ((@params.Length > 0 && int.TryParse(@params[0], out int bonusXp)) == false)
                 bonusXp = 1;
 
-            bonusXp = Math.Clamp(bonusXp, 1, 10000);
+            bonusXp = Math.Clamp(bonusXp, 0, 10000);
             avatar.Properties[PropertyEnum.XPBonusStackCount] = (float)bonusXp;
-            return $"XPBonusStackCount: x{bonusXp}";
+            return $"XP Bonus Stack: x{bonusXp}";
         }
     }
 }
