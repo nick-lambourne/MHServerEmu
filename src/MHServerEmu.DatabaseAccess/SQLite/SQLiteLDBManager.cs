@@ -38,7 +38,7 @@ namespace MHServerEmu.DatabaseAccess.SQLite
         /// </summary>
         private bool InitializeDatabaseFile()
         {
-            string initializationScript = SQLiteScripts.GetLeaderboardsScript();
+            string initializationScript = SQLiteScripts.GetInitializationScript();
             if (initializationScript == string.Empty)
                 return Logger.ErrorReturn(false, "InitializeDatabaseFile(): Failed to get database initialization script");
 
@@ -53,9 +53,17 @@ namespace MHServerEmu.DatabaseAccess.SQLite
             return true;
         }
 
-        private void CreateLeaderboards()
+        private bool CreateLeaderboards()
         {
-            // TODO Add leaderboards
+            string initializationScript = SQLiteScripts.GetLeaderboardsScript();
+            if (initializationScript == string.Empty)
+                return Logger.ErrorReturn(false, "CreateLeaderboards(): Failed to get database initialization script");
+
+            SQLiteConnection.CreateFile(_dbFilePath);
+            using SQLiteConnection connection = GetConnection();
+            connection.Execute(initializationScript);
+
+            return Logger.InfoReturn(true, $"Initialized Leaderboards using file at {Path.GetRelativePath(FileHelper.ServerRoot, _dbFilePath)} using schema version {CurrentSchemaVersion}");
         }
 
         /// <summary>
