@@ -545,11 +545,18 @@ namespace MHServerEmu.Games.Entities
             var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
             if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
             {
-                // Properties[PropertyEnum.InfinityXP] += amount;
+                Properties[PropertyEnum.InfinityXP] += scaledAmount;
+                if (scaledAmount >= Properties[PropertyEnum.InfinityGemNext]){
+                    Properties[PropertyEnum.InfinityPoints]++;
+                    Properties[PropertyEnum.InfinityXP] = 0;
+                }
             }
+            
             Logger.Info($"AwardXP():\n\tscaledAmount: {scaledAmount}"
              + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
              + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
+             + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
+             + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
              + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}");
 
             if (showXPAwardedText)
