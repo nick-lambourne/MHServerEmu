@@ -541,12 +541,13 @@ namespace MHServerEmu.Games.Entities
                 TryLevelUp(owner);
             }
 
-            var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < new AdvancementGlobalsPrototype().InfinityXPCap;
-            if (IsLessThanInfinityCap)
+            AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
+            var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
+            if (IsLessThanInfinityCap &&  Properties[PropertyEnum.CharacterLevel] > advancementProto.InfinitySystemUnlockLevel)
             {
                 // Properties[PropertyEnum.InfinityXP] += amount;
             }
-            Logger.Info($"AwardXP(): scaledAmount: {scaledAmount}\nIsLessThanInfinityCap: {IsLessThanInfinityCap}\nProperties: {Properties}");
+            Logger.Info($"AwardXP(): scaledAmount: {scaledAmount}\nInfinitySystemUnlockLevel: {InfinitySystemUnlockLevel}\nadvancementProto: {advancementProto.InfinityXPCap}\nIsLessThanInfinityCap: {IsLessThanInfinityCap}");
 
             if (showXPAwardedText)
             {
