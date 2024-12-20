@@ -545,7 +545,7 @@ namespace MHServerEmu.Games.Entities
             long infinityPoints = Properties[PropertyEnum.InfinityPoints];
             long infinityXp = Properties[PropertyEnum.InfinityXP];
             PrototypeId rank = Properties[PropertyEnum.Rank].ToPrototypeId();
-            string rankName = PrototypeId.GetName(rank);
+            string rankName = rank.GetName();
 
             AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
             var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
