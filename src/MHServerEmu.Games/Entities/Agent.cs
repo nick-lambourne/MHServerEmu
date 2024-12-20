@@ -547,8 +547,8 @@ namespace MHServerEmu.Games.Entities
             PrototypeId rank = Properties[PropertyEnum.Rank].ToPrototypeId();
             AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
             bool IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
-
-            if(rank.Equals((long)8976851340449549026)){ // Mods/Ranks/Avatar.prototype
+            bool IsPlayerAvatar = rank.Equals((long)8976851340449549026); // Mods/Ranks/Avatar.prototype
+            if(IsPlayerAvatar){
                 if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
                 {
                     Properties[PropertyEnum.InfinityXP] += scaledAmount;
@@ -563,6 +563,7 @@ namespace MHServerEmu.Games.Entities
                 + $"\n\trank: {rank}"
                 + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
                 + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
+                + $"\n\tIsPlayerAvatar: {IsPlayerAvatar}"
                 + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
                 + $"\n\tCharacterLevel >= advancementProto.InfinitySystemUnlockLevel: {CharacterLevel >= advancementProto.InfinitySystemUnlockLevel}"
                 + $"\n\tscaledAmount >= infinityGemNext: {scaledAmount >= infinityGemNext}"
