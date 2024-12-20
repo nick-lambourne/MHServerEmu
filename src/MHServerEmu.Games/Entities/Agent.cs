@@ -544,7 +544,6 @@ namespace MHServerEmu.Games.Entities
             long infinityGemNext = Properties[PropertyEnum.InfinityGemNext];
             long infinityPoints = Properties[PropertyEnum.InfinityPoints];
             long infinityXp = Properties[PropertyEnum.InfinityXP];
-            PropertyValue rank = Properties[PropertyEnum.Rank];
 
             AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
             var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
@@ -557,9 +556,10 @@ namespace MHServerEmu.Games.Entities
                 }
             }
 
+            Logger.Info($"Properties: {Properties}");
             Logger.Info($"AwardXP():\n\tamount: {scaledAmount}"
-             + $"\n\trank: {rank}"
-             + $"\n\ttscaledAmount: {scaledAmount}"
+            //  + $"\n\trank: {rank}"
+             + $"\n\tscaledAmount: {scaledAmount}"
              + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
              + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
              + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
