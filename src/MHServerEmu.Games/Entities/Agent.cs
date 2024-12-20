@@ -531,6 +531,8 @@ namespace MHServerEmu.Games.Entities
             Player owner = GetOwnerOfType<Player>();
             if (owner == null) return Logger.WarnReturn(0, "AwardXP(): owner == null");
 
+            var scaledAmount = amount * Properties[PropertyEnum.AvatarPrestigeLevel];
+            
             // TODO: Apply PrestigeXPFactor
 
             if (IsAtLevelCap == false)
@@ -538,6 +540,13 @@ namespace MHServerEmu.Games.Entities
                 Properties[PropertyEnum.ExperiencePoints] += amount;
                 TryLevelUp(owner);
             }
+
+            var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < new AdvancementGlobalsPrototype().InfinityXPCap;
+            if (IsLessThanInfinityCap)
+            {
+                // Properties[PropertyEnum.InfinityXP] += amount;
+            }
+            Logger.Info($"AwardXP(): scaledAmount: {scaledAmount}\nIsLessThanInfinityCap: {IsLessThanInfinityCap}\nProperties: {Properties}");
 
             if (showXPAwardedText)
             {
