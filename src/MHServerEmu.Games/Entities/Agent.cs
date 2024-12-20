@@ -541,25 +541,30 @@ namespace MHServerEmu.Games.Entities
                 TryLevelUp(owner);
             }
 
+            long infinityGemNext = Properties[PropertyEnum.InfinityGemNext];
+            long infinityPoints = Properties[PropertyEnum.InfinityPoints];
+            long infinityXp = Properties[PropertyEnum.InfinityXP];
+            Rank rank = Properties[PropertyEnum.Rank];
+
             AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
             var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
             if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
             {
                 Properties[PropertyEnum.InfinityXP] += scaledAmount;
-                if (scaledAmount >= Properties[PropertyEnum.InfinityGemNext]){
+                if (scaledAmount >= infinityGemNext){
                     Properties[PropertyEnum.InfinityPoints]++;
-                    Properties[PropertyEnum.InfinityXP] = 0;
+                    Properties[PropertyEnum.InfinityXP] = scaledAmount.Equals(infinityGemNext) ? 0 : scaledAmount - infinityGemNext;
                 }
             }
 
-            int infinityPoints = Properties[PropertyEnum.InfinityPoints];
-            int infinityXp = Properties[PropertyEnum.InfinityPoints];
             Logger.Info($"AwardXP():\n\tamount: {scaledAmount}"
+             + $"\n\trank: {rank}"
              + $"\n\ttscaledAmount: {scaledAmount}"
              + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
              + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
              + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
              + $"\n\tInfinityPoints: {infinityPoints}"
+             + $"\n\tinfinityGemNext: {infinityGemNext}"
              + $"\n\tInfinityXP: {infinityXp}");
 
             if (showXPAwardedText)
