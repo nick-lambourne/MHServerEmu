@@ -545,30 +545,31 @@ namespace MHServerEmu.Games.Entities
             long infinityPoints = Properties[PropertyEnum.InfinityPoints];
             long infinityXp = Properties[PropertyEnum.InfinityXP];
             PrototypeId rank = Properties[PropertyEnum.Rank].ToPrototypeId();
-            string rankName = rank.GetName();
 
-            AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
-            var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
-            if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
-            {
-                Properties[PropertyEnum.InfinityXP] += scaledAmount;
-                if (scaledAmount >= infinityGemNext){
-                    Properties[PropertyEnum.InfinityPoints]++;
-                    Properties[PropertyEnum.InfinityXP] = scaledAmount.Equals(infinityGemNext) ? 0 : scaledAmount - infinityGemNext;
+            if(rank.Equals(8976851340449549026)){ // Mods/Ranks/Avatar.prototype
+                AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
+                var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
+                if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
+                {
+                    Properties[PropertyEnum.InfinityXP] += scaledAmount;
+                    if (scaledAmount >= infinityGemNext){
+                        Properties[PropertyEnum.InfinityPoints]++;
+                        Properties[PropertyEnum.InfinityXP] = scaledAmount.Equals(infinityGemNext) ? 0 : scaledAmount - infinityGemNext;
+                    }
                 }
-            }
 
-            Logger.Info($"Properties: {Properties}");
-            Logger.Info($"AwardXP():\n\tamount: {scaledAmount}"
-             + $"\n\tscaledAmount: {scaledAmount}"
-             + $"\n\trank: {rank}"
-             + $"\n\trankName: {rankName}"
-             + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
-             + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
-             + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
-             + $"\n\tInfinityPoints: {infinityPoints}"
-             + $"\n\tinfinityGemNext: {infinityGemNext}"
-             + $"\n\tInfinityXP: {infinityXp}");
+                Logger.Info($"AwardXP():\n\tamount: {scaledAmount}"
+                + $"\n\tscaledAmount: {scaledAmount}"
+                + $"\n\trank: {rank}"
+                + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
+                + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
+                + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
+                + $"\n\tCharacterLevel >= advancementProto.InfinitySystemUnlockLevel: {CharacterLevel >= advancementProto.InfinitySystemUnlockLevel}"
+                + $"\n\tscaledAmount >= infinityGemNext: {scaledAmount >= infinityGemNext}"
+                + $"\n\tInfinityPoints: {infinityPoints}"
+                + $"\n\tinfinityGemNext: {infinityGemNext}"
+                + $"\n\tInfinityXP: {infinityXp}");
+            }
 
             if (showXPAwardedText)
             {
