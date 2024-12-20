@@ -552,8 +552,8 @@ namespace MHServerEmu.Games.Entities
                 }
             }
 
-            var infinityPoints = Properties[PropertyEnum.InfinityPoints];
-            var infinityXp = Properties[PropertyEnum.InfinityPoints];
+            int infinityPoints = Properties[PropertyEnum.InfinityPoints];
+            int infinityXp = Properties[PropertyEnum.InfinityPoints];
             Logger.Info($"AwardXP():\n\tscaledAmount: {scaledAmount}"
              + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
              + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
