@@ -545,10 +545,10 @@ namespace MHServerEmu.Games.Entities
             long infinityPoints = Properties[PropertyEnum.InfinityPoints];
             long infinityXp = Properties[PropertyEnum.InfinityXP];
             PrototypeId rank = Properties[PropertyEnum.Rank].ToPrototypeId();
+            AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
+            bool IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
 
             if(rank.Equals((long)8976851340449549026)){ // Mods/Ranks/Avatar.prototype
-                AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
-                var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
                 if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
                 {
                     Properties[PropertyEnum.InfinityXP] += scaledAmount;
