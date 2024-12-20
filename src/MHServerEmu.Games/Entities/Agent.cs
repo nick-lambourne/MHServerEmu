@@ -551,13 +551,13 @@ namespace MHServerEmu.Games.Entities
                     Properties[PropertyEnum.InfinityXP] = 0;
                 }
             }
-            
+
             Logger.Info($"AwardXP():\n\tscaledAmount: {scaledAmount}"
              + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
              + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
              + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
-             + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}"
-             + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}");
+             + $"\n\tIsLessThanInfinityCap: {Properties[PropertyEnum.InfinityPoints]}"
+             + $"\n\tIsLessThanInfinityCap: {Properties[PropertyEnum.InfinityXP]}");
 
             if (showXPAwardedText)
             {
