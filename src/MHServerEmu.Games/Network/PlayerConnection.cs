@@ -1116,7 +1116,7 @@ namespace MHServerEmu.Games.Network
         private bool OnDamageMeter(MailboxMessage message) // 59
         {
             var damageMeter = message.As<NetMessageDamageMeter>();
-            return Logger.InfoReturn(true, $"OnDamageMeter(): {message}");
+            return Logger.InfoReturn(true, $"OnDamageMeter(): {damageMeter}");
         }
 
         private bool OnMetaGameUpdateNotification(MailboxMessage message)
