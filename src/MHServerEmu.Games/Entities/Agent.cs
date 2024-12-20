@@ -531,7 +531,7 @@ namespace MHServerEmu.Games.Entities
             Player owner = GetOwnerOfType<Player>();
             if (owner == null) return Logger.WarnReturn(0, "AwardXP(): owner == null");
 
-            var scaledAmount = amount * Properties[PropertyEnum.AvatarPrestigeLevel];
+            var scaledAmount = amount * (Properties[PropertyEnum.AvatarPrestigeLevel] ? Properties[PropertyEnum.AvatarPrestigeLevel] : 1);
             
             // TODO: Apply PrestigeXPFactor
 
