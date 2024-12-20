@@ -543,14 +543,14 @@ namespace MHServerEmu.Games.Entities
 
             AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
             var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
-            if (IsLessThanInfinityCap &&  Properties[PropertyEnum.CharacterLevel] > advancementProto.InfinitySystemUnlockLevel)
+            if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
             {
                 // Properties[PropertyEnum.InfinityXP] += amount;
             }
-            Logger.Info($"AwardXP():\n\tscaledAmount: {scaledAmount}");
-            Logger.Info($"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}");
-            Logger.Info($"\n\tadvancementProto: {advancementProto.InfinityXPCap}");
-            Logger.Info($"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}");
+            Logger.Info($"AwardXP():\n\tscaledAmount: {scaledAmount}"
+             + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
+             + $"\n\tInfinityXPCap: {advancementProto.InfinityXPCap}"
+             + $"\n\tIsLessThanInfinityCap: {IsLessThanInfinityCap}");
 
             if (showXPAwardedText)
             {
