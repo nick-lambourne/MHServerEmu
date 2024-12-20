@@ -546,7 +546,7 @@ namespace MHServerEmu.Games.Entities
             long infinityXp = Properties[PropertyEnum.InfinityXP];
             PrototypeId rank = Properties[PropertyEnum.Rank].ToPrototypeId();
 
-            if(rank.Equals(8976851340449549026)){ // Mods/Ranks/Avatar.prototype
+            if(rank.Equals((long)8976851340449549026)){ // Mods/Ranks/Avatar.prototype
                 AdvancementGlobalsPrototype advancementProto = GameDatabase.AdvancementGlobalsPrototype;
                 var IsLessThanInfinityCap = Properties[PropertyEnum.InfinityXP] < advancementProto.InfinityXPCap;
                 if (CharacterLevel >= advancementProto.InfinitySystemUnlockLevel && IsLessThanInfinityCap)
@@ -557,8 +557,8 @@ namespace MHServerEmu.Games.Entities
                         Properties[PropertyEnum.InfinityXP] = scaledAmount.Equals(infinityGemNext) ? 0 : scaledAmount - infinityGemNext;
                     }
                 }
-
-                Logger.Info($"AwardXP():\n\tamount: {scaledAmount}"
+            }
+            Logger.Info($"AwardXP():\n\tamount: {scaledAmount}"
                 + $"\n\tscaledAmount: {scaledAmount}"
                 + $"\n\trank: {rank}"
                 + $"\n\tInfinitySystemUnlockLevel: {advancementProto.InfinitySystemUnlockLevel}"
@@ -569,7 +569,6 @@ namespace MHServerEmu.Games.Entities
                 + $"\n\tInfinityPoints: {infinityPoints}"
                 + $"\n\tinfinityGemNext: {infinityGemNext}"
                 + $"\n\tInfinityXP: {infinityXp}");
-            }
 
             if (showXPAwardedText)
             {
