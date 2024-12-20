@@ -469,6 +469,7 @@ namespace MHServerEmu.Games.Network
                 case ClientToGameServerMessage.NetMessageRequestDeathRelease:               OnRequestDeathRelease(message); break;              // 52
                 case ClientToGameServerMessage.NetMessageReturnToHub:                       OnReturnToHub(message); break;                      // 55
                 case ClientToGameServerMessage.NetMessageRequestMissionRewards:             OnRequestMissionRewards(message); break;            // 57
+                case ClientToGameServerMessage.NetMessageDamageMeter          :             OnDamageMeter(message); break;                      // 59
                 case ClientToGameServerMessage.NetMessageMetaGameUpdateNotification:        OnMetaGameUpdateNotification(message); break;       // 63
                 case ClientToGameServerMessage.NetMessageNotifyFullscreenMovieStarted:      OnNotifyFullscreenMovieStarted(message); break;     // 84
                 case ClientToGameServerMessage.NetMessageNotifyFullscreenMovieFinished:     OnNotifyFullscreenMovieFinished(message); break;    // 85
@@ -1110,6 +1111,12 @@ namespace MHServerEmu.Games.Network
                 Player.MissionManager?.OnRequestMissionRewards(missionRef, entityId);
 
             return true;
+        }
+
+        private bool OnDamageMeter(MailboxMessage message) // 59
+        {
+            var damageMeter = message.As<NetMessageDamageMeter>();
+            return Logger.InfoReturn(true, $"OnDamageMeter(): {message}");
         }
 
         private bool OnMetaGameUpdateNotification(MailboxMessage message)
